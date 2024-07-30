@@ -22,7 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppStyle.bgColor,
+      backgroundColor: AppStyles.bgColor,
       body: page[_index],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.white,

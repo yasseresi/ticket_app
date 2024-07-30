@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app_flutter/core/res/styles/app_styles.dart';
+import 'package:ticket_app_flutter/screens/all_tickets.dart';
 
 class AppDboubleText extends StatelessWidget {
   final String bigText;
@@ -17,13 +18,21 @@ class AppDboubleText extends StatelessWidget {
         children: [
           Text(
             bigText,
-            style: AppStyle.headLineStyle3,
+            style: AppStyles.headLineStyle3,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AllTickets(),
+                ),
+              );
+            },
             child: Text(
               smallText,
-              style: AppStyle.textStyle,
+              style: AppStyles.textStyle.copyWith(
+                color: AppStyles.primaryColor,
+              ),
             ),
           )
         ],
