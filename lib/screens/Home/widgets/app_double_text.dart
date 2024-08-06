@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app_flutter/core/res/styles/app_styles.dart';
-import 'package:ticket_app_flutter/screens/all_tickets.dart';
+import 'package:ticket_app_flutter/screens/Home/all_tickets.dart';
 
 class AppDboubleText extends StatelessWidget {
   final String bigText;
   final String smallText;
+  
+  final VoidCallback func;
+  
 
-  const AppDboubleText({required this.bigText, required this.smallText});
+  const AppDboubleText({required this.bigText, required this.smallText, required this.func});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +24,7 @@ class AppDboubleText extends StatelessWidget {
             style: AppStyles.headLineStyle3,
           ),
           InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AllTickets(),
-                ),
-              );
-            },
+            onTap:func,
             child: Text(
               smallText,
               style: AppStyles.textStyle.copyWith(

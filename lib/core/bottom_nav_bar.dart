@@ -2,7 +2,11 @@ import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_app_flutter/core/res/media.dart';
 import 'package:ticket_app_flutter/core/res/styles/app_styles.dart';
-import 'package:ticket_app_flutter/screens/home_screen.dart';
+import 'package:ticket_app_flutter/core/res/utils/all_json.dart';
+import 'package:ticket_app_flutter/screens/Home/home_screen.dart';
+import 'package:ticket_app_flutter/screens/ticket/ticket_screen.dart';
+
+import '../screens/search/search_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -15,8 +19,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _index = 0;
   var page = [
     const HomePage(),
-    const Center(child: Text("search")),
-    const Center(child: Text("tickets")),
+    const SearchScreen(),
+    TicketScreen(element: ticketList[0],),
     const Center(child: Text("profil")),
   ];
   @override
