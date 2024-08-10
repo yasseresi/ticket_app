@@ -19,7 +19,7 @@ class AllTickets extends StatelessWidget {
           children: ticketList
               .map(
                 (e) => GestureDetector(
-                  onTap: () {
+                onTap: () {
                     int index = ticketList.indexOf(e);
                     Navigator.of(context).push(
                       MaterialPageRoute(

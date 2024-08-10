@@ -6,6 +6,7 @@ import 'package:ticket_app_flutter/core/res/styles/app_styles.dart';
 import 'package:ticket_app_flutter/core/res/utils/all_json.dart';
 import 'package:ticket_app_flutter/screens/Home/all_hotels.dart';
 import 'package:ticket_app_flutter/screens/Home/widgets/app_double_text.dart';
+import 'package:ticket_app_flutter/screens/Home/widgets/heading_text.dart';
 import 'package:ticket_app_flutter/screens/Home/widgets/hotel.dart';
 import 'package:ticket_app_flutter/screens/Home/widgets/ticket_view.dart';
 import 'package:ticket_app_flutter/screens/Home/all_tickets.dart';
@@ -50,10 +51,7 @@ class _HomePageState extends State<HomePage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              "Book Tickets",
-                              style: AppStyles.headLineStyle1,
-                            ),
+                            const HeadingText(text: "Book Tickets"),
                           ],
                         ),
                         Container(
@@ -66,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
+                        
                       ],
                     ),
                     const SizedBox(

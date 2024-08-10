@@ -4,6 +4,7 @@ import 'package:ticket_app_flutter/core/res/media.dart';
 import 'package:ticket_app_flutter/core/res/styles/app_styles.dart';
 import 'package:ticket_app_flutter/core/res/utils/all_json.dart';
 import 'package:ticket_app_flutter/screens/Home/home_screen.dart';
+import 'package:ticket_app_flutter/screens/profile/profile_page.dart';
 import 'package:ticket_app_flutter/screens/ticket/ticket_screen.dart';
 
 import '../screens/search/search_screen.dart';
@@ -21,7 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomePage(),
     const SearchScreen(),
     TicketScreen(element: ticketList[0],),
-    const Center(child: Text("profil")),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
