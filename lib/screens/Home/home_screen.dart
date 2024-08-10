@@ -10,6 +10,9 @@ import 'package:ticket_app_flutter/screens/Home/widgets/hotel.dart';
 import 'package:ticket_app_flutter/screens/Home/widgets/ticket_view.dart';
 import 'package:ticket_app_flutter/screens/Home/all_tickets.dart';
 
+import '../hotel_details.dart';
+import '../ticket/ticket_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -23,7 +26,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: AppStyles.bgColor,
       body: ListView(
-        
         children: [
           const SizedBox(
             height: 40,
@@ -109,8 +111,22 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(left: 20),
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children:
-                      ticketList.map((e) => TicketView(ticket: e)).toList(),
+                  children: ticketList
+                      .map(
+                        (e) => GestureDetector(
+                          child: TicketView(ticket: e),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => TicketScreen(
+                                  element: e,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
               const SizedBox(
@@ -127,10 +143,25 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              SingleChildScrollView(scrollDirection: Axis.horizontal  ,child: Row(
-                children:hotelList.map((e) => Hotel(hotel: e)).toList(), 
-                
-              )),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: hotelList
+                        .map(
+                          (e) => GestureDetector(
+                            child: Hotel(hotel: e),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => HotelDetails(hotel: e),
+                                ),
+                              );
+                              //TODO: FIX THE ROUTE LATER
+                            },
+                          ),
+                        )
+                        .toList(),
+                  )),
             ],
           )
         ],

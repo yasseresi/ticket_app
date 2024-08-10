@@ -1,4 +1,8 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../core/res/styles/app_styles.dart';
 
@@ -52,9 +56,9 @@ class HotelDetails extends StatelessWidget {
                               shadows: [
                                 Shadow(
                                     blurRadius: 10.0,
-                                    //color: Colors.red,
+                                    // color: Colors.red,
                                     color: AppStyles.primaryColor,
-                                    offset: const Offset(2.0, 2.0))
+                                    offset: const Offset(8.0, 2.0))
                               ]),
                         )),
                   )
@@ -64,9 +68,11 @@ class HotelDetails extends StatelessWidget {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
-              // child: ExpandedTextWidget(text: hotel["detail"]),
+              child: ExpandedTextWidget(
+                  text:
+                      "jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]] jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]"),
             ),
             const Padding(
                 padding: EdgeInsets.all(16.0),
@@ -81,17 +87,61 @@ class HotelDetails extends StatelessWidget {
                   // itemCount: hotel["images"].length,
                   itemCount: 3,
                   itemBuilder: (context, imagesIndex) {
-                    print("${hotel["images"][0]}");
                     return Container(
-                        margin: EdgeInsets.all(16),
-                        color: Colors.red,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ) ,
+                        margin: const EdgeInsets.all(16),
                         child: Image.asset(
+                            
                             "assests/images/${hotel["images"][imagesIndex]}"));
                   }),
             )
           ]))
         ],
       ),
+    );
+  }
+}
+
+class ExpandedTextWidget extends StatefulWidget {
+  final String text;
+
+  const ExpandedTextWidget({super.key, required this.text});
+
+  @override
+  State<ExpandedTextWidget> createState() => _ExpandedTextWidgetState();
+}
+
+class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
+  bool isExpanded = false;
+  _changeState() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Text _textResult = Text(
+      widget.text,
+      maxLines: isExpanded ? null : 3,
+      overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _textResult,
+        GestureDetector(
+          onTap: _changeState,
+          child: Text(
+            isExpanded ? "less" : " more",
+            style: AppStyles.textStyle.copyWith(
+              color: AppStyles.primaryColor,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
