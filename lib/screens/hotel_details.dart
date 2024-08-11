@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:ticket_app_flutter/controllers/hotel_details_controller.dart';
 
 import '../core/res/styles/app_styles.dart';
 
@@ -68,8 +70,8 @@ class HotelDetails extends StatelessWidget {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: ExpandedTextWidget(
                   text:
                       "jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]] jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]jdhajdgh kdj dfjghakjdfh akdhpf akd nd;kfd jfakjdf ajdf ajkfhdl ajdhfpajdh fpasd fajdhpf jadh gadhf faskdjhfak jdgh;kldgfjfihpdjgha hdspjkhg pjghapsdjhpajdhpfkjap dfj paodhf hkhdahdfiad faidhpf adhahkf[a dfa[sdifh adsfahodf[ asdhfa dfh[aidsf af]]]]"),
@@ -90,10 +92,9 @@ class HotelDetails extends StatelessWidget {
                     return Container(
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ) ,
+                        ),
                         margin: const EdgeInsets.all(16),
                         child: Image.asset(
-                            
                             "assests/images/${hotel["images"][imagesIndex]}"));
                   }),
             )
@@ -104,44 +105,37 @@ class HotelDetails extends StatelessWidget {
   }
 }
 
-class ExpandedTextWidget extends StatefulWidget {
+class ExpandedTextWidget extends StatelessWidget {
   final String text;
-
-  const ExpandedTextWidget({super.key, required this.text});
-
-  @override
-  State<ExpandedTextWidget> createState() => _ExpandedTextWidgetState();
-}
-
-class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
-  bool isExpanded = false;
-  _changeState() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
+  // ignore: non_constant_identifier_names
+  final HotelDetailsController controller = Get.put(HotelDetailsController());
+  ExpandedTextWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
-    Text _textResult = Text(
-      widget.text,
-      maxLines: isExpanded ? null : 3,
-      overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _textResult,
-        GestureDetector(
-          onTap: _changeState,
-          child: Text(
-            isExpanded ? "less" : " more",
-            style: AppStyles.textStyle.copyWith(
-              color: AppStyles.primaryColor,
+    return Obx(() {
+      Text _textResult = Text(
+        text,
+        maxLines: controller.isExpanded.value ? null : 3,
+        overflow: controller.isExpanded.value
+            ? TextOverflow.visible
+            : TextOverflow.ellipsis,
+      );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _textResult,
+          GestureDetector(
+            onTap: controller.changeState,
+            child: Text(
+              controller.isExpanded.value ? "less" : " more",
+              style: AppStyles.textStyle.copyWith(
+                color: AppStyles.primaryColor,
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
